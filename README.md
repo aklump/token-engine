@@ -51,7 +51,25 @@ $shout = $replace($template, $runtime_context);
 'HEY PETER!' === $shout;
 ```
 
+## Working with Styles
+
+```php
+$string = 'lorem';
+$stylized = (new \AKlump\TokenEngine\Helpers\StylizeString(new \AKlump\TokenEngine\Styles\TwigStyle()))($string);
+'{{ lorem }}' === $stylized;
+
+$array = ['foo' => 'bar'];
+$stylized = (new \AKlump\TokenEngine\Helpers\ArrayStylizeKeys(new \AKlump\TokenEngine\Styles\TwigStyle()))($array);
+['{{ foo }}' => 'bar'] === $stylized;
+
+$array = ['foo' => 'bar'];
+$stylized = (new \AKlump\TokenEngine\Helpers\ArrayStylizeValues(new \AKlump\TokenEngine\Styles\TwigStyle()))($array);
+['foo' => '{{ bar }}'] === $stylized;
+```
+
 ## More Example Code
+
+This comes from a project's documentation generation.
 
 ```php
 // Combine two different token collections.
@@ -61,13 +79,17 @@ $collection = $collection->merge(GetBudgetTokens::getExampleTokens());
 // Sort them by their tokens.
 $collection = $collection->sort('token');
 
+// We want to the documentation to show the styled token.
+$styler = new \AKlump\TokenEngine\Helpers\StylizeString(new \AKlump\TokenEngine\Styles\AtStyle());
+
 // Iterate on the combined collection and access token properties.
-$markdown_table_rows = [];
+$table_data = [];
 foreach ($collection as $token) {
-  $markdown_table_rows[] = [
-    'token' => $token->token(),
+  $table_data[] = [
+    'token' => $styler($token->token()),
     'description' => $token->description(),
     'example' => $token->value(),
   ];
 }
+$table = (new CreateTable())($table_data);
 ```

@@ -1,31 +1,31 @@
 {
-    "name": "aklump/token-engine",
-    "description": "A style-independent engine for string token replacement.",
-    "homepage": "https://intheloftstudios.com/packages/composer/token-engine",
-    "authors": [
-        {
-            "name": "Aaron Klump",
-            "homepage": "http://www.intheloftstudios.com",
-            "role": "Senior Developer"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "AKlump\\TokenEngine\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "AKlump\\TokenEngine\\Tests\\Unit\\": "./tests_unit"
-        }
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^9.6",
-        "aklump/phpswap": "^0.0.7"
-    },
-    "require": {
-        "php": ">=7.4",
-        "ramsey/collection": "^1.3"
-    },
-    "license": "BSD-3-Clause"
+  "name": "aklump/token-engine",
+  "description": "A style-independent engine for string token replacement.",
+  "homepage": "https://intheloftstudios.com/packages/composer/token-engine",
+  "authors": [
+    {
+      "name": "Aaron Klump",
+      "homepage": "http://www.intheloftstudios.com",
+      "role": "Senior Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "AKlump\\TokenEngine\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "AKlump\\TokenEngine\\Tests\\Unit\\": "./tests_unit"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.6",
+    "aklump/phpswap": "^0.0.7"
+  },
+  "require": {
+    "php": ">=7.4",
+    "ramsey/collection": "^1.3"
+  },
+  "license": "BSD-3-Clause"
 }
