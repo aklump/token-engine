@@ -62,9 +62,9 @@ $collection = $collection->merge(GetBudgetTokens::getExampleTokens());
 $collection = $collection->sort('token');
 
 // Iterate on the combined collection and access token properties.
-$token_info = [];
+$markdown_table_rows = [];
 foreach ($collection as $token) {
-  $token_info[] = [
+  $markdown_table_rows[] = [
     'token' => $token->token(),
     'description' => $token->description(),
     'example' => $token->value(),
