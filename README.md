@@ -1,14 +1,14 @@
-# aklump/tokens
+# Token Engine
 
 A style-independent engine for string token replacement.
 
 Here are three included styles...
 
-| Tokenized String   | Final Output | Style                                       |
-|--------------------|--------------|---------------------------------------------|
-| Hello {{ first }}, | Hello Peter, | \AKlump\TokenEngine\Styles\TwigStyle             |
-| Hello @first,      | Hello Peter, | \AKlump\TokenEngine\Styles\AtStyle               |
-| Hello __first,     | Hello Peter, | \AKlump\TokenEngine\Styles\DoubleUnderscoreStyle |
+| Tokenized String   | Final Output | Style                 |
+|--------------------|--------------|-----------------------|
+| Hello {{ first }}, | Hello Peter, | TwigStyle             |
+| Hello @first,      | Hello Peter, | AtStyle               |
+| Hello __first,     | Hello Peter, | DoubleUnderscoreStyle |
 
 Or make your own by implmenting `\AKlump\TokenEngine\TokenStyleInterface`
 

@@ -1,6 +1,6 @@
 {
   "name": "aklump/token-engine",
-  "description": "A style-independent engine for string token replacement..",
+  "description": "A style-independent engine for string token replacement.",
   "homepage": "https://intheloftstudios.com/packages/composer/token-engine",
   "authors": [
     {
