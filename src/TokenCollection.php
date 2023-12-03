@@ -47,4 +47,8 @@ class TokenCollection extends AbstractCollection {
     return $collection;
   }
 
+  public function map(callable $callback): TokenCollection {
+    return new static(array_map($callback, $this->data));
+  }
+
 }

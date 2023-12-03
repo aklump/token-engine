@@ -12,6 +12,27 @@ use PHPUnit\Framework\TestCase;
  */
 class TokenCollectionTest extends TestCase {
 
+  public function testMapWorksAsExpected() {
+    $collection = new TokenCollection();
+    $collection->add(new Token('zulu'));
+    $mapped = $collection->map(fn(Token $token) => $token->setValue('Zoo Lou'));
+    $this->assertSame('Zoo Lou', $mapped->first()->value());
+  }
+
+  public function testMapReturnsTokenCollection() {
+    $collection = new TokenCollection();
+    $collection->add(new Token('zulu'));
+    $mapped = $collection->map(fn($token) => $token);
+    $this->assertInstanceOf(TokenCollection::class, $mapped);
+  }
+
+  public function testMapReturnsNewInstance() {
+    $collection = new TokenCollection();
+    $collection->add(new Token('zulu'));
+    $mapped = $collection->map(fn($token) => $token);
+    $this->assertNotSame($collection, $mapped);
+  }
+
   public function testCanConstructFromAltTokenClassImplementingInterface() {
     $collection = new TokenCollection([new FooToken()]);
     $collection->add(new BarToken());
