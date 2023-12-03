@@ -14,7 +14,7 @@ class Token implements TokenInterface {
   protected $valueValue;
 
   public function __construct(string $token) {
-    $this->tokenValue = $token;
+    $this->setToken($token);
   }
 
   public function setDescription(string $description): self {
@@ -54,6 +54,12 @@ class Token implements TokenInterface {
 
   public function token(): string {
     return $this->tokenValue;
+  }
+
+  public function setToken(string $token): self {
+    $this->tokenValue = $token;
+
+    return $this;
   }
 
   public function value(array $context = []) {

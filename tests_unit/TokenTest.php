@@ -11,7 +11,7 @@ use stdClass;
  */
 class TokenTest extends TestCase {
 
-  public function testValueMethod() {
+  public function testValueMethods() {
     $foo = (new Token('bar'))->setValue('baz');
     $this->assertSame('baz', $foo->value());
   }
@@ -21,9 +21,11 @@ class TokenTest extends TestCase {
     $this->assertSame('Lorem', $foo->description());
   }
 
-  public function testTokenMethod() {
+  public function testTokenMethods() {
     $foo = new Token('bar');
     $this->assertSame('bar', $foo->token());
+    $foo->setToken('november');
+    $this->assertSame('november', $foo->token());
   }
 
   public function testValueCallableReceivesTokenAsLastArgument() {
