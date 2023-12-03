@@ -4,6 +4,7 @@ namespace AKlump\TokenEngine\Tests\Unit;
 
 use AKlump\TokenEngine\Token;
 use AKlump\TokenEngine\TokenCollection;
+use AKlump\TokenEngine\TokenInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -73,7 +74,7 @@ class TokenCollectionTest extends TestCase {
 
 }
 
-final class FooToken implements \AKlump\TokenEngine\TokenInterface {
+final class FooToken implements TokenInterface {
 
   public function description(): string {
     return '';
@@ -87,9 +88,20 @@ final class FooToken implements \AKlump\TokenEngine\TokenInterface {
     return 'Foo';
   }
 
+  public function setToken(string $token): TokenInterface {
+    return $this;
+  }
+
+  public function setValue($value): TokenInterface {
+    return $this;
+  }
+
+  public function setDescription(string $description): TokenInterface {
+    return $this;
+  }
 }
 
-final class BarToken implements \AKlump\TokenEngine\TokenInterface {
+final class BarToken implements TokenInterface {
 
   public function description(): string {
     return '';
@@ -103,4 +115,15 @@ final class BarToken implements \AKlump\TokenEngine\TokenInterface {
     return 'Bar';
   }
 
+  public function setToken(string $token): TokenInterface {
+    return $this;
+  }
+
+  public function setValue($value): TokenInterface {
+    return $this;
+  }
+
+  public function setDescription(string $description): TokenInterface {
+    return $this;
+  }
 }
