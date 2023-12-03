@@ -13,10 +13,30 @@ use PHPUnit\Framework\TestCase;
  */
 class TokenCollectionTest extends TestCase {
 
+  public function testFilterWorksAsExpected() {
+    $collection = new TokenCollection();
+    $collection->add(new Token('zulu'));
+    $filtered = $collection->filter(fn(TokenInterface $token) => $token->token() !== 'zulu');
+    $this->assertCount(0, $filtered);
+  }
+
+  public function testFilterReturnsTokenCollection() {
+    $collection = new TokenCollection();
+    $collection->add(new Token('zulu'));
+    $filtered = $collection->filter(fn($token) => true);
+    $this->assertInstanceOf(TokenCollection::class, $filtered);
+  }
+
+  public function testFilterReturnsNewInstance() {
+    $collection = new TokenCollection();
+    $collection->add(new Token('zulu'));
+    $filtered = $collection->filter(fn($token) => true);
+    $this->assertNotSame($collection, $filtered);
+  }
   public function testMapWorksAsExpected() {
     $collection = new TokenCollection();
     $collection->add(new Token('zulu'));
-    $mapped = $collection->map(fn(Token $token) => $token->setValue('Zoo Lou'));
+    $mapped = $collection->map(fn(TokenInterface $token) => $token->setValue('Zoo Lou'));
     $this->assertSame('Zoo Lou', $mapped->first()->value());
   }
 

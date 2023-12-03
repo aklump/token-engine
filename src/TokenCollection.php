@@ -47,6 +47,13 @@ class TokenCollection extends AbstractCollection {
     return $collection;
   }
 
+  public function filter(callable $callback): TokenCollection {
+    $collection = clone $this;
+    $collection->data = array_merge([], array_filter($collection->data, $callback));
+
+    return $collection;
+  }
+
   public function map(callable $callback): TokenCollection {
     return new static(array_map($callback, $this->data));
   }
