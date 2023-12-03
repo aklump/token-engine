@@ -63,12 +63,13 @@ class Token implements TokenInterface {
   }
 
   public function value(array $context = []) {
-    if (is_callable($this->valueValue)) {
-      $callable = $this->valueValue;
-
-      return $callable($context, $this);
-    }
     if (is_object($this->valueValue)) {
+      if (is_callable($this->valueValue)) {
+        $callable = $this->valueValue;
+
+        return $callable($context, $this);
+      }
+
       return (string) $this->valueValue;
     }
 
