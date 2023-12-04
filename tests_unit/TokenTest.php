@@ -11,6 +11,20 @@ use stdClass;
  */
 class TokenTest extends TestCase {
 
+  public function testStaticCreateMethod() {
+    $token = Token::create('name', 'Peter', 'The first name of the account.');
+    $this->assertSame('name', $token->token());
+    $this->assertSame('Peter', $token->value());
+    $this->assertSame('The first name of the account.', $token->description());
+  }
+
+  public function testConstructor() {
+    $token = new Token('name', 'Peter', 'The first name of the account.');
+    $this->assertSame('name', $token->token());
+    $this->assertSame('Peter', $token->value());
+    $this->assertSame('The first name of the account.', $token->description());
+  }
+
   public function testValueMethods() {
     $foo = (new Token('bar'))->setValue('baz');
     $this->assertSame('baz', $foo->value());

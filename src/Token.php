@@ -13,8 +13,17 @@ class Token implements TokenInterface {
    */
   protected $valueValue;
 
-  public function __construct(string $token) {
+  public static function create(string $token, $value = NULL, string $description = '') {
+    $token = new static($token, $value);
+    $token->setDescription($description);
+
+    return $token;
+  }
+
+  public function __construct(string $token, $value = NULL, string $description = '') {
     $this->setToken($token);
+    $this->setValue($value);
+    $this->setDescription($description);
   }
 
   public function setDescription(string $description): self {

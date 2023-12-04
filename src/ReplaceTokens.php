@@ -32,6 +32,7 @@ class ReplaceTokens {
     // Add the style to the find array.
     $find = array_map(fn(string $key) => $this->style->getPrefix() . $key . $this->style->getSuffix(), array_keys($replace));
 
+    // @url https://www.php.net/manual/en/ref.mbstring.php#109937
     return str_replace($find, $replace, $string);
   }
 
