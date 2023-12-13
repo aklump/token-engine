@@ -70,11 +70,9 @@ $stylized = (new \AKlump\TokenEngine\Helpers\ArrayStylizeValues(new \AKlump\Toke
 ## Generate CSV of Examples
 
 ```php
-$examples = \Foo\Bar::getExampleTokens();
-$examples = $examples->toKeyValueArray();
+$examples = \Foo\Bar::getExampleTokens()->toKeyValueArray();
 $examples = (new \AKlump\TokenEngine\Helpers\ArrayStylizeKeys(new TwigStyle()))($examples);
-$examples = array_keys($examples);
-$help_text = sprintf('Available tokens: %s', implode(', ', $examples));
+$help_text = sprintf('Available tokens: %s', implode(', ', array_keys($examples)));
 ```
 
 ## More Example Code
