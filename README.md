@@ -75,7 +75,7 @@ $examples = $examples->toKeyValueArray();
 $examples = (new \AKlump\TokenEngine\Helpers\ArrayStylizeKeys(new TwigStyle()))($examples);
 $examples = array_keys($examples);
 
-return t('The following tokens may be used in the body of this page: @examples', [
+return t('Available tokens: @examples', [
   '@examples' => implode(', ', $examples),
 ]);
 ```
