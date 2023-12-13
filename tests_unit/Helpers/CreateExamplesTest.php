@@ -15,8 +15,17 @@ use PHPUnit\Framework\TestCase;
  */
 class CreateExamplesTest extends TestCase {
 
-  public function testInvoke() {
+  public function testInvokeWithoutCallbackWorksAsExpected() {
+    $collection = new TokenCollection();
+    $collection->add(new Token('foo'));
+    $collection->add(new Token('bar'));
 
+    $examples = (new CreateExamples())($collection);
+    $this->assertNotSame($examples, $collection);
+    $this->assertSame($examples->toKeyValueArray(), $collection->toKeyValueArray());
+  }
+
+  public function testInvoke() {
     $collection = new TokenCollection();
     $collection->add(new Token('first_name'));
     $collection->add(new Token('last_name'));

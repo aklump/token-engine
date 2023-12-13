@@ -8,7 +8,7 @@ use AKlump\TokenEngine\TokenInterface;
 
 class CreateExamples {
 
-  public function __invoke(TokenCollection $tokens, callable $callback): TokenCollection {
+  public function __invoke(TokenCollection $tokens, callable $callback = NULL): TokenCollection {
     $examples = new TokenCollection();
     $extra = $examples->diffTokens($tokens);
     if ($extra) {
@@ -18,7 +18,9 @@ class CreateExamples {
     if ($missing) {
       foreach ($missing as $token_name) {
         $token = Token::create($token_name);
-        $callback($token);
+        if (is_callable($callback)) {
+          $callback($token);
+        }
         $examples->add($token);
       }
     }
