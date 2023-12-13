@@ -67,6 +67,19 @@ $stylized = (new \AKlump\TokenEngine\Helpers\ArrayStylizeValues(new \AKlump\Toke
 ['foo' => '{{ bar }}'] === $stylized;
 ```
 
+## Generate CSV of Examples
+
+```php
+$examples = \Foo\Bar::getExampleTokens();
+$examples = $examples->toKeyValueArray();
+$examples = (new \AKlump\TokenEngine\Helpers\ArrayStylizeKeys(new TwigStyle()))($examples);
+$examples = array_keys($examples);
+
+return t('The following tokens may be used in the body of this page: @examples', [
+  '@examples' => implode(', ', $examples),
+]);
+```
+
 ## More Example Code
 
 This comes from a project's documentation generation.
