@@ -74,10 +74,7 @@ $examples = \Foo\Bar::getExampleTokens();
 $examples = $examples->toKeyValueArray();
 $examples = (new \AKlump\TokenEngine\Helpers\ArrayStylizeKeys(new TwigStyle()))($examples);
 $examples = array_keys($examples);
-
-return t('Available tokens: @examples', [
-  '@examples' => implode(', ', $examples),
-]);
+$help_text = sprintf('Available tokens: %s', implode(', ', $examples));
 ```
 
 ## More Example Code
