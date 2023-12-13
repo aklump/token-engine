@@ -67,7 +67,7 @@ $stylized = (new \AKlump\TokenEngine\Helpers\ArrayStylizeValues(new \AKlump\Toke
 ['foo' => '{{ bar }}'] === $stylized;
 ```
 
-## Generate CSV of Examples
+## Generate CSV of Tokens for User Documentation
 
 ```php
 $examples = \Foo\Bar::getExampleTokens()->toKeyValueArray();
