@@ -13,6 +13,50 @@ use PHPUnit\Framework\TestCase;
  */
 class TokenCollectionTest extends TestCase {
 
+  public function testDiffTokensOnSelfReturnsNoDiff() {
+    $a = (new TokenCollection([
+      Token::create('foo', 'Foo'),
+      Token::create('bar', 'Foo'),
+    ]));
+    $diff = $a->diffTokens($a);
+    $this->assertCount(0, $diff);
+  }
+
+  public function testDiffTokensWorksAsExpectedOnTwoCollections() {
+    $a = (new TokenCollection([
+      Token::create('foo', 'Foo'),
+      Token::create('bar', 'Foo'),
+    ]));
+    $b = (new TokenCollection([
+      Token::create('foo', 'Foo'),
+    ]));
+
+    $diff = $a->diffTokens($b);
+    $this->assertCount(1, $diff);
+    $this->assertSame('bar', $diff[0]);
+
+    $diff = $b->diffTokens($a);
+    $this->assertCount(0, $diff);
+  }
+
+  public function testDiffTokensWorksWithThreeCollections() {
+    $a = (new TokenCollection([
+      Token::create('foo', 'Foo'),
+      Token::create('bar', 'Foo'),
+      Token::create('baz', 'Foo'),
+    ]));
+    $b = (new TokenCollection([
+      Token::create('bar', 'Foo'),
+    ]));
+    $c = (new TokenCollection([
+      Token::create('baz', 'Foo'),
+    ]));
+
+    $diff = $a->diffTokens($b, $c);
+    $this->assertCount(1, $diff);
+    $this->assertSame('foo', $diff[0]);
+  }
+
   public function testFilterWorksAsExpected() {
     $collection = new TokenCollection();
     $collection->add(new Token('zulu'));
@@ -23,16 +67,17 @@ class TokenCollectionTest extends TestCase {
   public function testFilterReturnsTokenCollection() {
     $collection = new TokenCollection();
     $collection->add(new Token('zulu'));
-    $filtered = $collection->filter(fn($token) => true);
+    $filtered = $collection->filter(fn($token) => TRUE);
     $this->assertInstanceOf(TokenCollection::class, $filtered);
   }
 
   public function testFilterReturnsNewInstance() {
     $collection = new TokenCollection();
     $collection->add(new Token('zulu'));
-    $filtered = $collection->filter(fn($token) => true);
+    $filtered = $collection->filter(fn($token) => TRUE);
     $this->assertNotSame($collection, $filtered);
   }
+
   public function testMapWorksAsExpected() {
     $collection = new TokenCollection();
     $collection->add(new Token('zulu'));

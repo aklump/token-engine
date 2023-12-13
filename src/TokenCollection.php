@@ -58,4 +58,24 @@ class TokenCollection extends AbstractCollection {
     return new static(array_map($callback, $this->data));
   }
 
+
+  /**
+   * Find tokens not present in other collections.
+   *
+   * This method completely ignores the values and operates only on the tokens.
+   *
+   * @param TokenCollection ...$comparators
+   *   An array of TokenCollection objects to compare against.
+   *
+   * @return array
+   *   An array of tokens that are present in the current TokenCollection object
+   *   but missing in any of the provided comparators.
+   */
+  public function diffTokens(TokenCollection ...$comparators): array {
+    $comparators = array_map(fn(TokenCollection $c) => $c->toKeyValueArray(), $comparators);
+    array_unshift($comparators, $this->toKeyValueArray());
+
+    return array_keys(array_diff_key(...$comparators));
+  }
+
 }
