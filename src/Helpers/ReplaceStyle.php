@@ -13,17 +13,29 @@ use AKlump\TokenEngine\TokenStyleInterface;
  */
 class ReplaceStyle {
 
-  public function __invoke(TokenStyleInterface $search, TokenStyleInterface $replace, string $subject): string {
+  /**
+   * Invokes the __invoke method.
+   *
+   * @param TokenStyleInterface $search The search token style.
+   * @param TokenStyleInterface $replace The replace token style.
+   * @param string $subject The subject string to perform the replacement on.
+   * @param callable|null $callback The optional callback function will receive
+   * the token value only (less prefix/suffix) and must return a token value.
+   * You would only use this if you wanted to mutate the replaced token.
+   *
+   * @return string The resulting string after performing the replacements.
+   */
+  public function __invoke(TokenStyleInterface $search, TokenStyleInterface $replace, string $subject, callable $callback = NULL): string {
     list($suffix, $include_matched_suffix) = $this->prepareSuffix($search->getSuffix());
     $prefix = preg_quote($search->getPrefix());
     $regex = $this->prepareRegex($prefix, $suffix);
 
-    return preg_replace_callback($regex, function (array $matches) use ($replace, $include_matched_suffix) {
-      return $this->replaceMatch($matches, $replace, $include_matched_suffix);
+    return preg_replace_callback($regex, function (array $matches) use ($replace, $include_matched_suffix, $callback) {
+      return $this->replaceMatch($matches, $replace, $include_matched_suffix, $callback);
     }, $subject);
   }
 
-  public function prepareSuffix($suffix): array {
+  protected function prepareSuffix($suffix): array {
     if (!empty($suffix)) {
       $include_matched_suffix = FALSE;
       $suffix = preg_quote($suffix);
@@ -36,12 +48,16 @@ class ReplaceStyle {
     return array($suffix, $include_matched_suffix);
   }
 
-  public function prepareRegex($prefix, $suffix): string {
+  protected function prepareRegex($prefix, $suffix): string {
     return sprintf('#(%s)(.+?)(%s)#', $prefix, $suffix);
   }
 
-  public function replaceMatch(array $matches, TokenStyleInterface $replace, bool $include_matched_suffix): string {
-    $result = $replace->getPrefix() . $matches[2];
+  protected function replaceMatch(array $matches, TokenStyleInterface $replace, bool $include_matched_suffix, callable $callback = NULL): string {
+    $value = $matches[2];
+    if (is_callable($callback)) {
+      $value = $callback($value);
+    }
+    $result = $replace->getPrefix() . $value;
     $result .= $replace->getSuffix();
     if ($include_matched_suffix) {
       $result .= $matches[3];
