@@ -2,15 +2,17 @@
 
 namespace AKlump\TokenEngine;
 
+use AKlump\TokenEngine\Traits\HasStyleTrait;
+
 class ReplaceTokens {
 
-  private TokenCollection $tokens;
+  protected TokenCollection $tokens;
 
-  private TokenStyleInterface $style;
+  use HasStyleTrait;
 
   public function __construct(TokenCollection $tokens, TokenStyleInterface $style) {
     $this->tokens = $tokens;
-    $this->style = $style;
+    $this->setStyle($style);
   }
 
   /**

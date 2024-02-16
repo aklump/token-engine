@@ -6,6 +6,7 @@ use AKlump\TokenEngine\ReplaceTokens;
 use AKlump\TokenEngine\Styles\AtStyle;
 use AKlump\TokenEngine\Styles\DoubleUnderscoreStyle;
 use AKlump\TokenEngine\Styles\TwigStyle;
+use AKlump\TokenEngine\Token;
 use AKlump\TokenEngine\TokenCollection;
 use AKlump\TokenEngine\TokenStyleInterface;
 use PHPUnit\Framework\TestCase;
@@ -22,10 +23,10 @@ class ReplaceTokensTest extends TestCase {
 
   public function testHeyPeterShout() {
     // Create a new token collection.
-    $tokens = new \AKlump\TokenEngine\TokenCollection();
+    $tokens = new TokenCollection();
 
     // Create a token with a callable value.
-    $callable_token = new \AKlump\TokenEngine\Token('first|toUpperCase');
+    $callable_token = new Token('first|toUpperCase');
     $callable_token->setValue(function (array $context) {
       return strtoupper($context['first']);
     });

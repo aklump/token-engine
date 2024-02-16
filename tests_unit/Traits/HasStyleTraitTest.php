@@ -4,7 +4,7 @@ namespace AKlump\TokenEngine\Tests\Unit\Traits;
 
 use AKlump\TokenEngine\Styles\AtStyle;
 use AKlump\TokenEngine\Styles\DoubleUnderscoreStyle;
-use AKlump\TokenEngine\Traits\HasStyleTrait;
+use AKlump\TokenEngine\Traits\ConstructsWithStyleTrait;
 
 /**
  * @covers \AKlump\TokenEngine\Tests\Unit\Traits\Foo
@@ -22,5 +22,5 @@ class HasStyleTraitTest extends \PHPUnit\Framework\TestCase {
 
 class Foo {
 
-  use HasStyleTrait;
+  use ConstructsWithStyleTrait;
 }

@@ -3,7 +3,7 @@
 namespace AKlump\TokenEngine\Helpers;
 
 use AKlump\TokenEngine\TokenCollection;
-use AKlump\TokenEngine\Traits\HasStyleTrait;
+use AKlump\TokenEngine\Traits\ConstructsWithStyleTrait;
 
 /**
  * Class ScanTokensByStyle
@@ -12,7 +12,7 @@ use AKlump\TokenEngine\Traits\HasStyleTrait;
  */
 class ScanTokensByStyle {
 
-  use HasStyleTrait;
+  use ConstructsWithStyleTrait;
 
   /**
    * Invoke the method as a callable.

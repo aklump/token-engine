@@ -9,17 +9,6 @@ trait HasStyleTrait {
   protected TokenStyleInterface $style;
 
   /**
-   * Class constructor.
-   *
-   * @param TokenStyleInterface $style The token style interface.
-   *
-   * @return void
-   */
-  public function __construct(TokenStyleInterface $style) {
-    $this->setStyle($style);
-  }
-
-  /**
    * Sets the token style.
    *
    * @param TokenStyleInterface $style The token style interface.
