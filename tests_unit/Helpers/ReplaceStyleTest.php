@@ -19,6 +19,25 @@ use PHPUnit\Framework\TestCase;
  */
 final class ReplaceStyleTest extends TestCase {
 
+  public function testWithCallback() {
+    $content_style = new TwigStyle();
+    $new_style = new DoubleUnderscoreStyle();
+    $content = '{{ lorem }}';
+    $expected = '___lorem';
+
+    // This logic comes from Jig where "___foo" is the same as "{{ foo }}".
+    $add_underscore_if_original = function ($value) {
+      if (substr($value, 0, 1) !== '_') {
+        return '_' . $value;
+      }
+
+      return $value;
+    };
+
+    $result = (new ReplaceStyle())($content_style, $new_style, $content, $add_underscore_if_original);
+    $this->assertSame($expected, $result);
+  }
+
   public function dataFortestInvokeProvider() {
     $tests = [];
     $tests[] = [
