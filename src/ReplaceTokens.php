@@ -15,7 +15,7 @@ class ReplaceTokens {
 
   /**
    * @param string $string
-   *   All tokens found in $string will be replaced.  Any tokens not prsent in
+   *   All tokens found in $string will be replaced.  Any tokens not present in
    *   the token collection will remain in the string in their original format;
    *   they are not removed, so you must ensure all necessary tokens are in your
    *   collection.
