@@ -26,15 +26,17 @@ final class ReplaceStyleTest extends TestCase {
     $expected = '___lorem';
 
     // This logic comes from Jig where "___foo" is the same as "{{ foo }}".
-    $add_underscore_if_original = function ($value) {
-      if (substr($value, 0, 1) !== '_') {
-        return '_' . $value;
+    $add_underscore_to_passthru = function ($token) {
+      $byte = substr($token, 0, 1);
+      $token = ltrim($token, '_');
+      if ($byte !== '_') {
+        $token = "_$token";
       }
 
-      return $value;
+      return $token;
     };
 
-    $result = (new ReplaceStyle())($content_style, $new_style, $content, $add_underscore_if_original);
+    $result = (new ReplaceStyle())($content_style, $new_style, $content, $add_underscore_to_passthru);
     $this->assertSame($expected, $result);
   }
 
