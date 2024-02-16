@@ -20,7 +20,7 @@ class ReplaceStyle {
    * @param TokenStyleInterface $replace The replace token style.
    * @param string $subject The subject string to perform the replacement on.
    * @param callable|null $callback The optional callback function will receive
-   * the token value only (less prefix/suffix) and must return a token value.
+   * the token only (less prefix/suffix) and must return a token.
    * You would only use this if you wanted to mutate the replaced token.
    *
    * @return string The resulting string after performing the replacements.
